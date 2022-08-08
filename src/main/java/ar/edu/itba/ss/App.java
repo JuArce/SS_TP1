@@ -18,6 +18,9 @@ public class App {
         List<Particle> particles = new ArrayList<>();
         Integer l = particleReader.read(particles);
         Grid grid = new Grid(l, particles);
+        grid.calculateNeighbours();
+        particles = grid.getParticles();
+        particles.forEach(System.out::println);
         return;
     }
 }

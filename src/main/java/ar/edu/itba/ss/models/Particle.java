@@ -1,8 +1,7 @@
 package ar.edu.itba.ss.models;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Particle {
     private static int SEQUENCE = 1;
@@ -12,14 +11,14 @@ public class Particle {
     private double x;
     private double y;
     private double radius;
-    private final List<Particle> neighbours;
+    private final Set<Particle> neighbours;
 
     public Particle(double radius, double x, double y) {
         this.id = SEQUENCE++;
         this.radius = radius;
         this.x = x;
         this.y = y;
-        this.neighbours = new ArrayList<>();
+        this.neighbours = new HashSet<>();
     }
 
     public Particle(double radius) {
@@ -34,7 +33,7 @@ public class Particle {
     }
 
     public boolean isNeighbour(Particle particle, double rc) {
-        return this.distanceTo(particle) <= rc;
+        return !this.equals(particle) && this.distanceTo(particle) <= rc;
     }
 
     public boolean isNeighbour(Particle particle) {
@@ -47,6 +46,12 @@ public class Particle {
         return Math.sqrt(delta_x * delta_x + delta_y * delta_y) - this.radius - particle.radius;
     }
 
+    public void setNeighbours(List<Particle> candidates) {
+        candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
+    }
+
+
+
     @Override
     public String toString() {
         return "Particle{" +
@@ -54,7 +59,7 @@ public class Particle {
                 ", x=" + x +
                 ", y=" + y +
                 ", radius=" + radius +
-                ", neighbours=" + neighbours +
+                ", neighbours=" + neighbours.stream().map(Particle::getId).toList() +
                 '}';
     }
 

@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,9 +18,6 @@ public class ParticleReader {
     public ParticleReader(String particlePath, String positionPath) {
         this.particleFile = new File(particlePath);
         this.positionFile = new File(positionPath);
-//        Files.lines(particleFile.toPath())
-//                .map(line -> line.split("\n"))// |s{3,4}
-//                .forEach(System.out::println);
     }
 
     public int read(List<Particle> particles) {
