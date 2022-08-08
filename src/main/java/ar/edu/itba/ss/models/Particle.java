@@ -1,21 +1,25 @@
 package ar.edu.itba.ss.models;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Particle {
-    private static int sequence = 1;
-    private static final double rc = 1.0;
-    int id;
-    double x;
-    double y;
-    double radius;
-    List<Particle> neighbours;
+    private static int SEQUENCE = 1;
+    private static final double RC = 1.0;
+
+    private int id;
+    private double x;
+    private double y;
+    private double radius;
+    private final List<Particle> neighbours;
 
     public Particle(double radius, double x, double y) {
-        this.id = sequence++;
+        this.id = SEQUENCE++;
         this.radius = radius;
         this.x = x;
         this.y = y;
+        this.neighbours = new ArrayList<>();
     }
 
     public Particle(double radius) {
@@ -23,15 +27,24 @@ public class Particle {
     }
 
     public void addNeighbour(Particle particle) {
-        //TODO
+        if (this.equals(particle)) {
+            return;
+        }
+        this.neighbours.add(particle);
+    }
+
+    public boolean isNeighbour(Particle particle, double rc) {
+        return this.distanceTo(particle) <= rc;
     }
 
     public boolean isNeighbour(Particle particle) {
-        return false; //TODO
+        return this.isNeighbour(particle, Particle.RC);
     }
 
     public double distanceTo(Particle particle) {
-        return 0; //TODO
+        final double delta_x = this.x - particle.x;
+        final double delta_y = this.y - particle.y;
+        return Math.sqrt(delta_x * delta_x + delta_y * delta_y) - this.radius - particle.radius;
     }
 
     @Override
@@ -43,6 +56,19 @@ public class Particle {
                 ", radius=" + radius +
                 ", neighbours=" + neighbours +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Particle particle = (Particle) o;
+        return id == particle.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public void setId(int id) {
