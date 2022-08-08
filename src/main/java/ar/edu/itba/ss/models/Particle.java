@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Particle {
     private static int SEQUENCE = 1;
-    private static final double RC = 1.0;
+    public static final double RC = 1.0;
 
     private int id;
     private double x;
