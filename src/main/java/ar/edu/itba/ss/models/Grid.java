@@ -1,11 +1,13 @@
 package ar.edu.itba.ss.models;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Grid {
     private final Cell[][] cells;
-    private final List<Particle> particles;
+    private final Set<Particle> particles;
     private final int m;
     private final int l;
 
@@ -13,11 +15,11 @@ public class Grid {
         this.l = sideLength;
         this.m = (int)Math.floor(sideLength / (Particle.RC + (2.0 * particles.stream().map(Particle::getRadius).max(Comparator.naturalOrder()).orElseThrow())));
         this.cells = new Cell[m][m];
-        this.particles = particles;
-        this.fillCells(particles);
+        this.particles = new HashSet<>(particles);
+        this.fillCells(this.particles);
     }
 
-    private void fillCells(List<Particle> particles) {
+    private void fillCells(Set<Particle> particles) {
         particles.forEach(p -> {
             int x = this.getXIndex(p);
             int y = this.getYIndex(p);
@@ -58,7 +60,7 @@ public class Grid {
         });
     }
 
-    public List<Particle> getParticles() {
+    public Set<Particle> getParticles() {
         return particles;
     }
 }

@@ -47,6 +47,9 @@ public class Particle {
         candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
     }
 
+    public Set<Particle> getNeighbours() {
+        return this.neighbours;
+    }
 
     @Override
     public String toString() {
