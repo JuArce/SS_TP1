@@ -12,7 +12,7 @@ public class CsvExporter implements Exporter {
     @Override
     public void export(String filename, Set<Particle> particles) {
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter("src/main/output/" + filename), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER);
+            CSVWriter writer = new CSVWriter(new FileWriter("src/main/output/" + filename), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
             particles.forEach(p -> {
                 List<String> line = new ArrayList<>();
                 line.add(String.valueOf(p.getId()));
