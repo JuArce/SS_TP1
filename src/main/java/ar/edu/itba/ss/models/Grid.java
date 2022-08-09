@@ -15,13 +15,13 @@ public class Grid {
         this.m = (int)Math.floor(sideLength / (Particle.RC + (2.0 * particles.stream().map(Particle::getRadius).max(Comparator.naturalOrder()).orElseThrow())));
         this.cells = new Cell[m][m];
         this.particles = particles;
-        this.setCells(particles);
+        this.fillCells(particles);
     }
 
-    private void setCells(List<Particle> particles) {
+    private void fillCells(List<Particle> particles) {
         particles.forEach(p -> {
-            int x = (int)Math.floor(p.getX() / ((double)this.l / this.m));
-            int y = (int)Math.floor(p.getY() / ((double)this.l / this.m));
+            int x = this.getXIndex(p);
+            int y = this.getYIndex(p);
             if (x < 0 || x >= m || y < 0 || y >= m) {
                 return;
             }
@@ -32,10 +32,18 @@ public class Grid {
         });
     }
 
+    private int getXIndex(Particle particle) {
+        return (int)Math.floor(particle.getX() / ((double)this.l / this.m));
+    }
+
+    private int getYIndex(Particle particle) {
+        return (int)Math.floor(particle.getY() / ((double)this.l / this.m));
+    }
+
     public void calculateNeighbours() {
         this.particles.forEach(p -> {
-            int x = (int)Math.floor(p.getX() / ((double)this.l / this.m));
-            int y = (int)Math.floor(p.getY() / ((double)this.l / this.m));
+            int x = this.getXIndex(p);
+            int y = this.getYIndex(p);
 
             List<Particle> candidates = new ArrayList<>();
             for (int i = x - 1; i <= x + 1; i++) {
