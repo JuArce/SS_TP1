@@ -15,7 +15,7 @@ public class BruteForce {
 
         ParticleReader particleReader = new ParticleReader(args[0],args[1]);
         List<Particle> particles = new ArrayList<>();
-        Integer l = particleReader.read(particles);
+        Integer l = particleReader.read(particles, Boolean.parseBoolean(args[2]));
 
         particles.forEach(p -> p.setNeighbours(particles));
         particles.forEach(System.out::println);

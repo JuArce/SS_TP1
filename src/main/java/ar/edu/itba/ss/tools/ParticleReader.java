@@ -1,6 +1,8 @@
 package ar.edu.itba.ss.tools;
 
 import ar.edu.itba.ss.models.Particle;
+import ar.edu.itba.ss.models.PeriodicPoint;
+import ar.edu.itba.ss.models.Point;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,17 +14,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ParticleReader {
-    File particleFile;
-    File positionFile;
+    private final File particleFile;
+    private final File positionFile;
+
 
     public ParticleReader(String particlePath, String positionPath) {
         this.particleFile = new File(particlePath);
         this.positionFile = new File(positionPath);
     }
 
-    public int read(List<Particle> particles) {
+    public int read(List<Particle> particles, boolean isPeriodic) {
         int sideLength = readParticles(particles);
-        readPositions(particles, sideLength);
+        readPositions(particles, sideLength, isPeriodic);
         return sideLength;
     }
 
@@ -45,7 +48,7 @@ public class ParticleReader {
         return sideLength;
     }
 
-    private void readPositions(List<Particle> particles, int sideLength) {
+    private void readPositions(List<Particle> particles, int sideLength, boolean isPeriodic) {
 
         List<String> lines = getLines(positionFile);
         Iterator<Particle> particleIterator = particles.iterator();
@@ -54,8 +57,9 @@ public class ParticleReader {
             String[] s = l.replaceAll("\\s+", " ").trim().split(" ");
             if (particleIterator.hasNext()) {
                 Particle p = particleIterator.next();
-                p.setX(Double.parseDouble(s[0]));
-                p.setY(Double.parseDouble(s[1]));
+                Point point = isPeriodic ? new PeriodicPoint(Double.parseDouble(s[0]), Double.parseDouble(s[1]), sideLength)
+                        : new Point(Double.parseDouble(s[0]), Double.parseDouble(s[1]));
+                p.setPosition(point);
             }
         });
     }

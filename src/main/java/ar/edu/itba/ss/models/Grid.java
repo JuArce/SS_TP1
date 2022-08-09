@@ -1,6 +1,5 @@
 package ar.edu.itba.ss.models;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -33,11 +32,11 @@ public class Grid {
     }
 
     private int getXIndex(Particle particle) {
-        return (int)Math.floor(particle.getX() / ((double)this.l / this.m));
+        return (int)Math.floor(particle.getPosition().getX() / ((double)this.l / this.m));
     }
 
     private int getYIndex(Particle particle) {
-        return (int)Math.floor(particle.getY() / ((double)this.l / this.m));
+        return (int)Math.floor(particle.getPosition().getY() / ((double)this.l / this.m));
     }
 
     public void calculateNeighbours() {
@@ -45,7 +44,6 @@ public class Grid {
             int x = this.getXIndex(p);
             int y = this.getYIndex(p);
 
-            List<Particle> candidates = new ArrayList<>();
             for (int i = x - 1; i <= x + 1; i++) {
                 for (int j = y - 1; j <= y + 1; j++) {
                     if (i < 0 || i >= m || j < 0 || j >= m) {
@@ -54,10 +52,9 @@ public class Grid {
                     if (cells[i][j] == null) {
                         continue;
                     }
-                    candidates.addAll(cells[i][j].getParticles());
+                    p.setNeighbours(cells[i][j].getParticles());
                 }
             }
-            p.setNeighbours(candidates);
         });
     }
 

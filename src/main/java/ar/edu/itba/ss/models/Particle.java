@@ -8,21 +8,19 @@ public class Particle {
     public static final double RC = 1.0;
 
     private int id;
-    private double x;
-    private double y;
+    private Point position;
     private double radius;
     private final Set<Particle> neighbours;
 
-    public Particle(double radius, double x, double y) {
+    public Particle(double radius, Point position) {
         this.id = SEQUENCE++;
         this.radius = radius;
-        this.x = x;
-        this.y = y;
+        this.position = position;
         this.neighbours = new HashSet<>();
     }
 
     public Particle(double radius) {
-        this(radius, 0, 0);
+        this(radius, new Point(0, 0));
     }
 
     public void addNeighbour(Particle particle) {
@@ -41,9 +39,7 @@ public class Particle {
     }
 
     public double distanceTo(Particle particle) {
-        final double delta_x = this.x - particle.x;
-        final double delta_y = this.y - particle.y;
-        return Math.sqrt(delta_x * delta_x + delta_y * delta_y) - this.radius - particle.radius;
+        return this.position.distanceTo(particle.position) - this.radius - particle.radius;
     }
 
     public void setNeighbours(List<Particle> candidates) {
@@ -51,13 +47,11 @@ public class Particle {
     }
 
 
-
     @Override
     public String toString() {
         return "Particle{" +
                 "id=" + id +
-                ", x=" + x +
-                ", y=" + y +
+                ", position=" + position +
                 ", radius=" + radius +
                 ", neighbours=" + neighbours.stream().map(Particle::getId).toList() +
                 '}';
@@ -84,20 +78,12 @@ public class Particle {
         return id;
     }
 
-    public double getX() {
-        return x;
+    public Point getPosition() {
+        return position;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
+    public void setPosition(Point position) {
+        this.position = position;
     }
 
     public double getRadius() {
