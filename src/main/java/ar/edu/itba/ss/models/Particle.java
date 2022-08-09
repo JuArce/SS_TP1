@@ -1,7 +1,8 @@
 package ar.edu.itba.ss.models;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Particle {
     private static int SEQUENCE = 1;
@@ -42,7 +43,7 @@ public class Particle {
         return this.position.distanceTo(particle.position) - this.radius - particle.radius;
     }
 
-    public void setNeighbours(List<Particle> candidates) {
+    public void setNeighbours(Set<Particle> candidates) {
         candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
     }
 

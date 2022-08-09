@@ -1,12 +1,12 @@
 package ar.edu.itba.ss;
 
-import ar.edu.itba.ss.models.Grid;
 import ar.edu.itba.ss.models.Particle;
 import ar.edu.itba.ss.tools.ParticleReader;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class BruteForce {
@@ -17,11 +17,10 @@ public class BruteForce {
         List<Particle> particles = new ArrayList<>();
         Integer l = particleReader.read(particles, Boolean.parseBoolean(args[2]));
 
-        particles.forEach(p -> p.setNeighbours(particles));
+        particles.forEach(p -> p.setNeighbours(new HashSet<>(particles)));
         particles.forEach(System.out::println);
 
         Instant end = Instant.now();
         System.out.println(Duration.between(start, end));
-        return;
     }
 }

@@ -1,20 +1,20 @@
 package ar.edu.itba.ss.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Cell {
-    private final List<Particle> particles;
+    private final Set<Particle> particles;
 
     public Cell() {
-        this.particles = new ArrayList<>();
+        this.particles = new HashSet<>();
     }
 
     public void addParticle(Particle particle) {
         this.particles.add(particle);
     }
 
-    public List<Particle> getParticles() {
+    public Set<Particle> getParticles() {
         return particles;
     }
 }
