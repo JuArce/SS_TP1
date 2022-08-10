@@ -8,14 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class OvitoExporter {
-    public void export(String filename, Set<Particle> particles, int selected) {
+public class OvitoExporter implements Exporter {
+    private int selectedId;
+
+    public OvitoExporter(int selectedId) {
+        this.selectedId = selectedId;
+    }
+
+    @Override
+    public void export(String filename, Set<Particle> particles) {
         try {
             CSVWriter writer = new CSVWriter(new FileWriter("src/main/output/" + filename), ' ', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
             writer.writeNext(new String[]{String.valueOf(particles.size())});
             writer.writeNext(new String[]{});
 
-            Particle selectedParticle = particles.stream().filter(p -> p.getId() == selected).findFirst().orElseThrow();
+            Particle selectedParticle = particles.stream().filter(p -> p.getId() == selectedId).findFirst().orElseThrow();
             particles.forEach(p -> {
                 List<String> line = new ArrayList<>();
                 line.add(String.valueOf(p.getId()));
@@ -37,6 +44,13 @@ public class OvitoExporter {
         } catch (Exception e) {
             e.printStackTrace(); //TODO: handle exception
         }
+    }
 
+    public int getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(int selectedId) {
+        this.selectedId = selectedId;
     }
 }

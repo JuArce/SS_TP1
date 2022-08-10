@@ -36,7 +36,7 @@ public class Ovito {
             });
         });
 
-        OvitoExporter exporter = new OvitoExporter();
-        exporter.export(args.length < 5 ? "outputOvito.csv" : args[4], new HashSet<>(particles), Integer.parseInt(args[3]));
+        OvitoExporter exporter = new OvitoExporter(Integer.parseInt(args[3]));
+        exporter.export(args.length < 5 ? "outputOvito.csv" : args[4], new HashSet<>(particles));
     }
 }
