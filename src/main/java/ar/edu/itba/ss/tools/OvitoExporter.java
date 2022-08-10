@@ -15,6 +15,7 @@ public class OvitoExporter {
             writer.writeNext(new String[]{String.valueOf(particles.size())});
             writer.writeNext(new String[]{});
 
+            Particle selectedParticle = particles.stream().filter(p -> p.getId() == selected).findFirst().orElseThrow();
             particles.forEach(p -> {
                 List<String> line = new ArrayList<>();
                 line.add(String.valueOf(p.getId()));
@@ -22,9 +23,9 @@ public class OvitoExporter {
                 line.add(String.valueOf(Particle.RC));
                 line.add(String.valueOf(p.getPosition().getX()));
                 line.add(String.valueOf(p.getPosition().getY()));
-                if (p.getId() == selected) {
+                if (p.equals(selectedParticle)) {
                     line.add("S");
-                } else if (p.getNeighbours().stream().map(Particle::getId).anyMatch(id -> id == selected)) {
+                } else if (selectedParticle.getNeighbours().contains(p)) {
                     line.add("N");
                 } else {
                     line.add("NN");

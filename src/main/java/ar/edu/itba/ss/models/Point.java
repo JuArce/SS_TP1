@@ -10,9 +10,9 @@ public class Point {
     }
 
     public double distanceTo(Point point) {
-        final double delta_x = this.x - point.x;
-        final double delta_y = this.y - point.y;
-        return Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        final double deltaX = this.x - point.x;
+        final double deltaY = this.y - point.y;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 
     @Override
