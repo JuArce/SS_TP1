@@ -12,6 +12,7 @@ public class Point {
     public double distanceTo(Point point) {
         final double deltaX = this.x - point.x;
         final double deltaY = this.y - point.y;
+
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 

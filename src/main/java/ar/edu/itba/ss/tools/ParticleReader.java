@@ -50,8 +50,11 @@ public class ParticleReader {
 
     private void readPositions(List<Particle> particles, int sideLength, boolean isPeriodic) {
         List<String> lines = getLines(positionFile);
+
         Iterator<Particle> particleIterator = particles.iterator();
+
         lines.remove(0);//First elements is the frame number
+
         lines.forEach(l -> {
             String[] s = l.replaceAll("\\s+", " ").trim().split(" ");
             if (particleIterator.hasNext()) {
@@ -65,6 +68,7 @@ public class ParticleReader {
 
     private List<String> getLines(File file) {
         List<String> lines = new ArrayList<>();
+
         try (Stream<String> stream = Files.lines(file.toPath())) {
             lines = stream
                     .map(l -> l.split("\n"))
@@ -73,6 +77,7 @@ public class ParticleReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         return lines;
     }
 }

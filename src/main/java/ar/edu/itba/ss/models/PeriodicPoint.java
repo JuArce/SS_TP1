@@ -12,8 +12,10 @@ public class PeriodicPoint extends Point {
     public double distanceTo(Point point) {
         final double auxDeltaX = Math.abs(this.x - point.x);
         final double deltaX = Double.min(auxDeltaX, this.side - auxDeltaX);
+
         final double auxDeltaY = Math.abs(this.y - point.y);
         final double deltaY = Double.min(auxDeltaY, this.side - auxDeltaY);
+
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 

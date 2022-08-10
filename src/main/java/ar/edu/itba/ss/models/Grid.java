@@ -82,7 +82,6 @@ public class Grid {
                     if (cells[mI][mJ] == null) {
                         continue;
                     }
-
                     p.setNeighbours(cells[mI][mJ].getParticles());
                 }
             }
