@@ -3,6 +3,7 @@ package ar.edu.itba.ss;
 import ar.edu.itba.ss.models.Grid;
 import ar.edu.itba.ss.models.Particle;
 import ar.edu.itba.ss.tools.CsvExporter;
+import ar.edu.itba.ss.tools.Exporter;
 import ar.edu.itba.ss.tools.ParticleReader;
 
 import java.time.Duration;
@@ -34,7 +35,7 @@ public class App {
         Instant end = Instant.now();
         System.out.println(Duration.between(start, end));
 
-        CsvExporter csvExporter = new CsvExporter();
-        csvExporter.export(args.length < 4 ? "output.csv" : args[3], grid.getParticles());
+        Exporter exporter = new CsvExporter();
+        exporter.export(args.length < 4 ? "output.csv" : args[3], grid.getParticles());
     }
 }

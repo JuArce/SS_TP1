@@ -49,7 +49,6 @@ public class ParticleReader {
     }
 
     private void readPositions(List<Particle> particles, int sideLength, boolean isPeriodic) {
-
         List<String> lines = getLines(positionFile);
         Iterator<Particle> particleIterator = particles.iterator();
         lines.remove(0);//First elements is the frame number
