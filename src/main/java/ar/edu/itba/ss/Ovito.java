@@ -28,12 +28,13 @@ public class Ovito {
             e.printStackTrace();
         }
 
+        Map<Integer, Particle> particleMap = new HashMap<>();
+        particles.forEach(p -> particleMap.put(p.getId(), p));
 
         lines.forEach(l -> {
             String[] s = l.split(",");
-            particles.stream().filter(p -> p.getId() == Integer.parseInt(s[0])).findFirst().ifPresent(p -> {
-                Arrays.stream(s).forEach(candidate -> p.addNeighbour(particles.stream().filter(p2 -> p2.getId() == Integer.parseInt(candidate)).findFirst().orElseThrow()));
-            });
+            Particle p = particleMap.get(Integer.parseInt(s[0]));
+            Arrays.stream(s).forEach(candidate -> p.addNeighbour(particleMap.get(Integer.parseInt(candidate))));
         });
 
         OvitoExporter exporter = new OvitoExporter(Integer.parseInt(args[3]));
