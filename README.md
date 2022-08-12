@@ -16,12 +16,14 @@ A continuación se detalla el diagrama UML de la arquitectura propuesta:
 
 # Gráficos
 
-El link al gráfico realizado para el punto 2 se encuentra en el
-siguiente [link](https://public.flourish.studio/visualisation/10893928/).
+Los link a los gráficos realizados para el punto 2 se encuentra en los
+siguientes link.
+* [Para **n particulas**](https://public.flourish.studio/visualisation/10893928/).
+* [Para **m celdas**](https://public.flourish.studio/visualisation/10894499/).
 
 # Dependencias
 
-* Java 17
+* [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 
 # Ejecución
 
