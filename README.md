@@ -16,9 +16,8 @@ A continuación se detalla el diagrama UML de la arquitectura propuesta:
 
 # Gráficos
 
-El link al gráfico realizado para el punto 2 se encuentra en el siguiente [link](https://public.flourish.studio/visualisation/10893928/).
-
-<div class="flourish-embed flourish-chart" data-src="visualisation/10893928"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+El link al gráfico realizado para el punto 2 se encuentra en el
+siguiente [link](https://public.flourish.studio/visualisation/10893928/).
 
 # Dependencias
 
@@ -29,6 +28,7 @@ El link al gráfico realizado para el punto 2 se encuentra en el siguiente [link
 ## Periodic
 
 Ingresar los parámetros:
+
 ```shell
 src/main/resources/Static100.txt src/main/resources/Dynamic100.txt false
 ```
@@ -36,6 +36,7 @@ src/main/resources/Static100.txt src/main/resources/Dynamic100.txt false
 ## Brute Force
 
 Ingresar los parámetros:
+
 ```shell
 src/main/resources/Static100.txt src/main/resources/Dynamic100.txt false
 ```
@@ -43,6 +44,7 @@ src/main/resources/Static100.txt src/main/resources/Dynamic100.txt false
 ## Ovito
 
 Ingresar los parámetros:
+
 ```shell
 src/main/resources/Static100.txt src/main/resources/Dynamic100.txt src/main/output/outputPeriodic.csv 29 outputOvito.csv 
 ```
